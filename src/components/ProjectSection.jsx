@@ -7,7 +7,6 @@ const projects = [
     id: 1,
     title: "Blog App",
     description: "A blog app that allows users to create and manage their own blogs.",
-    image: "/projects/blog_app.jpg",
     tags: ["React", "Spring Boot"],
     githubUrl: "https://github.com/bhanu250506/Blog-Application",
   },
@@ -15,7 +14,6 @@ const projects = [
     id: 2,
     title: "Group Chat App",
     description: "A real-time chat application using WebSocket and Spring Boot.",
-    image: "/projects/chat_app.mp4",
     tags: ["WebSocket", "Spring Boot", "HTML", "CSS", "JavaScript"],
     githubUrl: "https://github.com/bhanu250506/Group-Chat",
   },
@@ -23,7 +21,6 @@ const projects = [
     id: 3,
     title: "LMS App",
     description: "A complete UI for a Learning Management System built in Flutter.",
-    image: "/projects/mobile_project.mp4",
     tags: ["Flutter", "Dart", "MongoDB"],
     githubUrl: "https://github.com/bhanu250506/Lms-Ui",
   }
@@ -51,68 +48,49 @@ export const ProjectsSection = () => {
               key={project.id}
               className={cn(
                 "rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 group overflow-hidden animate-fade-in",
-                "p-0" // no padding, handled inside
+                "p-6 flex flex-col gap-3"
               )}
-              style={{ backgroundColor: "hsl(var(--card))", animationDelay: `${index * 150}ms`, animationFillMode: "both" }}
+              style={{
+                backgroundColor: "hsl(var(--card))",
+                animationDelay: `${index * 150}ms`,
+                animationFillMode: "both",
+              }}
             >
-              <div className="relative h-48 overflow-hidden">
-                {project.image.endsWith(".mp4") ? (
-                  <video
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    src={project.image}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                  />
-                ) : (
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                )}
+              <div className="flex flex-wrap gap-2">
+                {project.tags.map((tag, i) => (
+                  <span
+                    key={i}
+                    className="bg-secondary text-xs text-secondary-foreground px-3 py-1 rounded-full font-medium"
+                  >
+                    {tag}
+                  </span>
+                ))}
               </div>
 
-              <div className="p-6 flex flex-col gap-3">
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag, i) => (
-                    <span
-                      key={i}
-                      className="bg-secondary text-xs text-secondary-foreground px-3 py-1 rounded-full font-medium"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+              <h3 className="text-xl font-semibold">{project.title}</h3>
+              <p className="text-muted-foreground text-sm">{project.description}</p>
 
-                <h3 className="text-xl font-semibold">{project.title}</h3>
-                <p className="text-muted-foreground text-sm">{project.description}</p>
-
-                <div className="mt-3 flex items-center gap-4">
-                  {project.githubUrl && (
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-foreground/80 hover:text-primary transition-colors"
-                      title="View Code"
-                    >
-                      <Github size={20} />
-                    </a>
-                  )}
-                  {project.demoUrl && (
-                    <a
-                      href={project.demoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-foreground/80 hover:text-primary transition-colors"
-                      title="Live Demo"
-                    >
-                      <ExternalLink size={20} />
-                    </a>
-                  )}
-                </div>
+              <div className="mt-3 flex items-center gap-4">
+                {project.githubUrl && (
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 rounded-md bg-primary text-white text-sm flex items-center gap-2 hover:bg-primary/90 transition"
+                  >
+                    <Github size={16} /> View GitHub
+                  </a>
+                )}
+                {project.demoUrl && (
+                  <a
+                    href={project.demoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 rounded-md bg-secondary text-secondary-foreground text-sm flex items-center gap-2 hover:bg-secondary/80 transition"
+                  >
+                    <ExternalLink size={16} /> Live Demo
+                  </a>
+                )}
               </div>
             </div>
           ))}
