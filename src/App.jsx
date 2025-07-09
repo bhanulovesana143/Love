@@ -10,7 +10,7 @@ function App() {
 
   return (
     <>
-    <BrowserRouter basename="/Sana">
+    <BrowserRouter basename="/Love">
 
 
     <Routes>
