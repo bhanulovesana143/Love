@@ -1,17 +1,20 @@
 
 import { AboutSection } from "../components/AboutSection.jsx"
-import { ExperienceSection } from "../components/ExperienceSection.jsx"
+import {  ForeverWithHerSection } from "../components/Forever.jsx"
+import { FeelingsSection } from "../components/FeelingSection.jsx"
 import { HeroSection } from "../components/HeroSection.jsx"
 import {  InteractiveParticleBackground } from "../components/InteractiveParticleBackground.jsx"
 import { Navbar } from "../components/Navbar.jsx"
-import { ProjectsSection } from "../components/ProjectSection.jsx"
-import { SkillsSection } from "../components/SkillSection.jsx"
-import { ThemeToggle } from "../components/ThemeToggle"
+import { MomentsSection } from "../components/ProjectSection.jsx"
+import LettersToSanaPage from "../components/letter.jsx"
+
+
+
 
 export const Home = () => {
     return <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
         {/*  Theme Toggle */}
-    <ThemeToggle/>
+  
 
 
          {/*  Background Effect */}
@@ -32,11 +35,16 @@ export const Home = () => {
            <main>
           
 
+
             <HeroSection/>
+            <LettersToSanaPage/>
+
             <AboutSection/>
-            <SkillsSection/>
-            <ProjectsSection/>
-            <ExperienceSection/>
+            <FeelingsSection/>
+            <MomentsSection/>
+            <ForeverWithHerSection/>
+            
+            
            </main>
 
 

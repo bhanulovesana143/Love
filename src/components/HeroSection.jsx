@@ -1,56 +1,60 @@
 import { ArrowDown } from "lucide-react";
 import { InteractiveParticleBackground } from "./InteractiveParticleBackground";
+
 export const HeroSection = () => {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col items-center justify-center px-4 bg-background text-foreground overflow-hidden"
+      className="relative min-h-screen flex flex-col items-center justify-center px-4 bg-black text-white overflow-hidden"
     >
-      {/* Interactive Background */}
+      {/* Background Hearts Animation */}
       <div className="absolute inset-0 z-0">
         <InteractiveParticleBackground />
       </div>
 
-      {/* Content Container */}
+      {/* Hero Content */}
       <div className="container max-w-4xl mx-auto text-center z-10">
         <div className="space-y-6">
-          {/* Heading */}
-          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight">
+          {/* Headline */}
+          <h1 className="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">
             <span className="block animate-slide-in opacity-0 animation-delay-200">
-              Hi, my name is
+              This is for someone special —
             </span>
-            <span className="block text-primary animate-text-glow animation-delay-400">
-              Bhanu Pratap Singh
-            </span>
+           <a
+  href="#letters"
+  className="block text-pink-400 animate-text-glow animation-delay-400 hover:underline cursor-pointer transition duration-300"
+>
+  Sana 💖
+</a>
+
           </h1>
 
-          {/* Description */}
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in animation-delay-700">
-            I'm Bhanu — a full-stack Android and web developer proficient in
-            Flutter, React, Spring Boot, and Node.js. I specialize in building
-            efficient, scalable applications with clean code and engaging user
-            experiences.
+          {/* Subheadline */}
+          <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto animate-fade-in animation-delay-700">
+            Maybe she’s a little rude, maybe she gets angry… but even through all that,
+            I still Love her. Like the sea loves the moonlight 🌙. Sana, you're someone
+            incredibly special to me — always have been, always will be. 🩷
           </p>
 
-          {/* CTA Button */}
+          {/* Call to Action */}
           <div className="pt-4 animate-fade-in animation-delay-1000">
             <a
-              href="#projects"
-              className="px-6 py-3 rounded-md text-white bg-gradient-to-r from-blue-500 to-purple-600 hover:from-purple-600 hover:to-blue-500 transition duration-300 shadow-md hover:shadow-lg"
+              href="#moments"
+              className="px-6 py-3 rounded-lg text-white bg-gradient-to-r from-pink-500 to-fuchsia-600 hover:from-fuchsia-600 hover:to-pink-500 transition duration-300 shadow-xl hover:shadow-2xl"
             >
-              View My Projects
+              Made With Love 💌
             </a>
           </div>
         </div>
       </div>
 
-      {/* Scroll Indicator */}
+      {/* Scroll Icon */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 flex flex-col items-center animate-bounce">
-        <span className="text-sm text-muted-foreground mb-2">Scroll</span>
-        <ArrowDown className="h-5 w-5 text-primary" />
+        <span className="text-sm text-gray-400 mb-2">Scroll down to feel 💫</span>
+        <ArrowDown className="h-6 w-6 text-pink-400" />
       </div>
 
-      {/* CSS Animations */}
+      {/* Custom Animations */}
       <style jsx>{`
         @keyframes fade-in {
           from {
@@ -77,12 +81,12 @@ export const HeroSection = () => {
         @keyframes text-glow {
           0%,
           100% {
-            text-shadow: 0 0 10px rgba(99, 102, 241, 0.5),
-              0 0 20px rgba(99, 102, 241, 0.4);
+            text-shadow: 0 0 8px rgba(255, 105, 180, 0.6),
+              0 0 16px rgba(255, 105, 180, 0.4);
           }
           50% {
-            text-shadow: 0 0 20px rgba(139, 92, 246, 0.8),
-              0 0 40px rgba(139, 92, 246, 0.6);
+            text-shadow: 0 0 18px rgba(255, 182, 193, 0.9),
+              0 0 32px rgba(255, 182, 193, 0.7);
           }
         }
 

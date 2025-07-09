@@ -1,105 +1,96 @@
-import { Code, Briefcase } from "lucide-react";
+import { Heart, Sparkles, Smile } from "lucide-react";
 import { InteractiveParticleBackground } from "./InteractiveParticleBackground";
 
 export const AboutSection = () => {
   return (
     <section
       id="about"
-      className="py-24 px-4 bg-background text-foreground relative overflow-hidden"
+      className="py-24 px-4 bg-black text-white relative overflow-hidden"
     >
-      {/* Interactive Background */}
+      {/* Background Animation */}
       <div className="absolute inset-0 z-0">
         <InteractiveParticleBackground />
       </div>
 
       <div className="container mx-auto max-w-5xl relative z-10">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center animate-fade-up">
-          About <span className="text-primary">Me</span>
+        <h2 className="text-4xl font-bold mb-12 text-center animate-fade-up">
+          About <span className="text-pink-400">Her</span>
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          {/* Left Text Block */}
+          {/* Text Block About Her */}
           <div className="space-y-6">
-            <h3 className="text-2xl font-semibold animate-fade-up-delay">
-              A Full-Stack Web & Android Developer
+            <h3 className="text-2xl font-semibold text-pink-300 animate-fade-up-delay">
+              Sana – The Girl Who Lights Up My World 💫
             </h3>
 
-            <p className="text-lg text-muted-foreground animate-fade-up-delay">
-              I’m <strong>Bhanu</strong>, a passionate developer skilled in
-              building modern Web and Android applications using{" "}
-              <strong>React</strong>, <strong>Flutter</strong>,{" "}
-              <strong>Node.js</strong>, and <strong>Spring Boot</strong>. I
-              focus on clean architecture, responsive design, and
-              performance-optimized code.
+            <p className="text-lg text-gray-300 animate-fade-up-delay">
+              She’s not just a someone. But She’s someone i Love the most from bottom of my Heart <strong>Sana</strong> She's someone .
+              who i admire the most Someone i love to talk someone whom i want to send
+              my future.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 pt-4 animate-fade-up-delay">
-              <a
-                href="https://www.linkedin.com/in/bhanupratapsn/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full shadow-md hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-              >
-                Get In Touch
-              </a>
-
-              <a
-                href="https://app.luminpdf.com/viewer/6869119afa86e7d2c5dfd206"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block px-6 py-3 rounded-full border border-primary text-primary hover:bg-primary/10 transition-colors duration-300"
-              >
-                View Resume
-              </a>
+            <div className="pt-4 animate-fade-up-delay">
+              <span className="text-sm text-pink-200 italic">
+                {" "}
+                SSana if u are reading this so I Love you So much
+                that i am so crazy about you.
+              </span>
             </div>
           </div>
 
-          {/* Right Cards */}
+          {/* Cards for Things You Love About Her */}
           <div className="grid grid-cols-1 gap-6">
-            {/* Web Dev */}
-            <div className="p-6 rounded-2xl card hover:scale-105 transition-transform duration-300 group">
+            {/* Her Smile */}
+            <div className="p-6 rounded-2xl bg-pink-950/30 border border-pink-400/30 shadow-lg hover:scale-105 transition-all group">
               <div className="flex items-start gap-4">
-                <div className="p-3 rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                  <Code className="h-6 w-6 text-primary" />
+                <div className="p-3 rounded-full bg-pink-400/20 group-hover:bg-pink-400/30 transition">
+                  <Smile className="h-6 w-6 text-pink-300" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-lg mb-1">Web Development</h4>
-                  <p className="text-muted-foreground">
-                    Creating interactive and responsive websites using modern
-                    frameworks like React, Tailwind, and Next.js.
+                  <h4 className="font-semibold text-lg text-white mb-1">
+                    Her Smile 😊
+                  </h4>
+                  <p className="text-gray-300">
+                   She wear the most beautiful smile a smile that fix my 
+                   day. I could see it
+                    a million times and still be mesmerized.
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Android Dev */}
-            <div className="p-6 rounded-2xl card hover:scale-105 transition-transform duration-300 group">
+            {/* Her Vibe */}
+            <div className="p-6 rounded-2xl bg-pink-950/30 border border-pink-400/30 shadow-lg hover:scale-105 transition-all group">
               <div className="flex items-start gap-4">
-                <div className="p-3 rounded-full bg-primary/10 group-hover:bg-primary/20 text-primary text-xl">
-                  🤖
+                <div className="p-3 rounded-full bg-pink-400/20 group-hover:bg-pink-400/30 transition">
+                  <Sparkles className="h-6 w-6 text-pink-300" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-lg mb-1">Android Development</h4>
-                  <p className="text-muted-foreground">
-                    Building mobile apps with Flutter that are fast, scalable,
-                    and visually consistent across Android and iOS platforms.
+                  <h4 className="font-semibold text-lg text-white mb-1">
+                    Her Vibe ✨
+                  </h4>
+                  <p className="text-gray-300">
+                    She doesn't even try — but still she is the most
+                    beautiful girl for me that I can’t help falling for.
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Backend Dev */}
-            <div className="p-6 rounded-2xl card hover:scale-105 transition-transform duration-300 group">
+            {/* My Love for Her */}
+            <div className="p-6 rounded-2xl bg-pink-950/30 border border-pink-400/30 shadow-lg hover:scale-105 transition-all group">
               <div className="flex items-start gap-4">
-                <div className="p-3 rounded-full bg-primary/10 group-hover:bg-primary/20">
-                  <Briefcase className="h-6 w-6 text-primary" />
+                <div className="p-3 rounded-full bg-pink-400/20 group-hover:bg-pink-400/30 transition">
+                  <Heart className="h-6 w-6 text-pink-300" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-lg mb-1">Backend Development</h4>
-                  <p className="text-muted-foreground">
-                    Creating scalable backend systems with{" "}
-                    <strong>Node.js</strong> and <strong>Spring Boot</strong>,
-                    RESTful APIs, and database integrations using MySQL and MongoDB.
+                  <h4 className="font-semibold text-lg text-white mb-1">
+                    The Way I Feel ❤️
+                  </h4>
+                  <p className="text-gray-300">
+                    It’s not just a crush. It’s deep, real, and I’d choose her
+                    in every lifetime. Even if she never knows.
                   </p>
                 </div>
               </div>
@@ -108,7 +99,7 @@ export const AboutSection = () => {
         </div>
       </div>
 
-      {/* Animations */}
+      {/* Animation Styles */}
       <style jsx>{`
         @keyframes fadeUp {
           from {

@@ -6,107 +6,121 @@ export const InteractiveParticleBackground = () => {
   useEffect(() => {
     const c = canvasRef.current;
     const ctx = c.getContext("2d");
-    let particles = [];
+    let hearts = [];
     let animationId;
-    const particleCount = Math.floor((window.innerWidth * window.innerHeight) / 8000);
-    const maxDist = 150;
+
+    const heartCount = Math.floor((window.innerWidth * window.innerHeight) / 2000); // More hearts!
 
     c.width = window.innerWidth;
     c.height = window.innerHeight;
 
-    class Particle {
+    class Heart {
       constructor() {
         this.reset();
       }
       reset() {
         this.x = Math.random() * c.width;
         this.y = Math.random() * c.height;
-        this.vx = (Math.random() - 0.5) * 0.5;
-        this.vy = (Math.random() - 0.5) * 0.5;
-        this.size = Math.random() * 2 + 1;
+        this.vx = (Math.random() - 0.5) * 0.7;
+        this.vy = (Math.random() - 0.5) * 0.7;
+        this.baseSize = Math.random() * 4 + 3;
+        this.size = this.baseSize;
+        this.alpha = Math.random() * 0.3 + 0.7;
+        this.color = this.randomColor();
+        this.pulse = Math.random() * 0.02 + 0.005;
+        this.time = 0;
+      }
+      randomColor() {
+        const pinkShades = [
+          "255,105,180", // Hot Pink
+          "255,182,193", // Light Pink
+          "255,20,147",  // Deep Pink
+          "255,128,171", // Pastel
+          "255,192,203"  // Soft Blush
+        ];
+        return pinkShades[Math.floor(Math.random() * pinkShades.length)];
       }
       update() {
         this.x += this.vx;
         this.y += this.vy;
-        if (this.x < 0 || this.x > c.width || this.y < 0 || this.y > c.height) {
+        this.time += this.pulse;
+        this.size = this.baseSize + Math.sin(this.time * 2) * 1.5;
+
+        if (
+          this.x < -50 ||
+          this.x > c.width + 50 ||
+          this.y < -50 ||
+          this.y > c.height + 50
+        ) {
           this.reset();
         }
       }
       draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.scale(this.size / 10, this.size / 10);
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.moveTo(0, 0);
+        ctx.bezierCurveTo(0, -3, -5, -3, -5, 0);
+        ctx.bezierCurveTo(-5, 3, 0, 5, 0, 7);
+        ctx.bezierCurveTo(0, 5, 5, 3, 5, 0);
+        ctx.bezierCurveTo(5, -3, 0, -3, 0, 0);
+        ctx.closePath();
+        ctx.fillStyle = `rgba(${this.color}, ${this.alpha})`;
+        ctx.shadowColor = `rgba(${this.color}, 0.6)`;
+        ctx.shadowBlur = 12;
         ctx.fill();
+        ctx.restore();
       }
     }
 
-    const createParticles = () => {
-      particles = [];
-      for (let i = 0; i < particleCount; i++) {
-        particles.push(new Particle());
+    const createHearts = () => {
+      hearts = [];
+      for (let i = 0; i < heartCount; i++) {
+        hearts.push(new Heart());
       }
     };
 
-    const connectParticles = () => {
-      particles.forEach((p, i) => {
-        for (let j = i + 1; j < particles.length; j++) {
-          const p2 = particles[j];
-          const dx = p.x - p2.x;
-          const dy = p.y - p2.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < maxDist) {
-            const alpha = 1 - dist / maxDist;
-            ctx.strokeStyle = `rgba(${themeColor},${alpha * 0.3})`;
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.stroke();
-          }
-        }
-      });
-    };
-
-    let themeColor = "0,0,0"; // dark theme default
-    const updateTheme = () => {
-      const dark = document.documentElement.classList.contains("dark");
-      themeColor = dark ? "255,255,255" : "0,0,0";
-      ctx.fillStyle = `rgba(${themeColor},0.7)`;
-    };
-
     const animate = () => {
-      updateTheme();
-      ctx.clearRect(0, 0, c.width, c.height);
-      particles.forEach((p) => {
-        p.update();
-        p.draw();
+      ctx.fillStyle = "rgba(0,0,0,0.2)";
+      ctx.fillRect(0, 0, c.width, c.height);
+      hearts.forEach((h) => {
+        h.update();
+        h.draw();
       });
-      connectParticles();
       animationId = requestAnimationFrame(animate);
     };
 
-    createParticles();
+    createHearts();
     animate();
 
     const handleResize = () => {
       c.width = window.innerWidth;
       c.height = window.innerHeight;
-      createParticles();
+      createHearts();
     };
 
     window.addEventListener("resize", handleResize);
-    const themeObserver = new MutationObserver(animate);
-    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
 
     return () => {
       cancelAnimationFrame(animationId);
       window.removeEventListener("resize", handleResize);
-      themeObserver.disconnect();
     };
   }, []);
 
-  return <canvas ref={canvasRef} style={{
-    position: "fixed", top: 0, left: 0,
-    width: "100%", height: "100%",
-    zIndex: 0, pointerEvents: "none"
-  }} />;
+  return (
+    <canvas
+      ref={canvasRef}
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        zIndex: 0,
+        pointerEvents: "none",
+        backgroundColor: "#000",
+      }}
+    />
+  );
 };

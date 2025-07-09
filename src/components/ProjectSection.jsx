@@ -1,110 +1,109 @@
-import { ArrowRight, ExternalLink, Github } from "lucide-react";
-import { InteractiveParticleBackground } from "./InteractiveParticleBackground";
-import { cn } from "@/lib/utils";
 
-const projects = [
+import {
+  Clock,
+  HeartHandshake,
+  Gift,
+  MessageCircle,
+  BookOpen,
+  Sparkles,
+} from "lucide-react";
+import { InteractiveParticleBackground } from "./InteractiveParticleBackground";
+import birthday from '../assets/image.png'
+
+
+// 💖 Moments Data
+const moments = [
   {
     id: 1,
-    title: "Blog App",
-    description: "A blog app that allows users to create and manage their own blogs.",
-    tags: ["React", "Spring Boot"],
-    githubUrl: "https://github.com/bhanu250506/Blog-Application",
+    title: "The Day I First Saw Her",
+    description:
+      "So that day all it started unintentionally falling for You. And still in love with you.",
+    icon: <Sparkles className="h-6 w-6 text-pink-400" />,
   },
   {
     id: 2,
-    title: "Group Chat App",
-    description: "A real-time chat application using WebSocket and Spring Boot.",
-    tags: ["WebSocket", "Spring Boot", "HTML", "CSS", "JavaScript"],
-    githubUrl: "https://github.com/bhanu250506/Group-Chat",
+    title: "Our First Fight",
+    description:
+      "I still remember ,the debate the discussion but some How i still love that momemt Because in that moment I'm  with her ",
+    icon: <HeartHandshake className="h-6 w-6 text-pink-400" />,
   },
   {
     id: 3,
-    title: "LMS App",
-    description: "A complete UI for a Learning Management System built in Flutter.",
-    tags: ["Flutter", "Dart", "MongoDB"],
-    githubUrl: "https://github.com/bhanu250506/Lms-Ui",
-  }
+    title: "Late Night Conversations",
+    description:
+      "We’d talk about the  life, silly things — and it always felt like the beautiful part for me",
+    icon: <MessageCircle className="h-6 w-6 text-pink-400" />,
+  },
+  {
+    id: 4,
+    title: "Outside the Library",
+    description:
+      "Just standing there and talking for an hour — it felt more peaceful than a vacation. Time slowed down.",
+    icon: <BookOpen className="h-6 w-6 text-pink-400" />,
+  },
+  {
+    id: 5,
+    title: "12 AM Birthday Wish",
+    description:
+      "She wished me at midnight, gave me chocolate, and her smile that night was the best gift I could ever get.",
+    icon: <Gift className="h-6 w-6 text-pink-400" />,
+    image: birthday, // 💖 Add your image in public/images
+  },
+  {
+    id: 6,
+    title: "Still Waiting, Still Loving",
+    description:
+      "Even if she doesn’t feel the same way, I keep Love these moments — they’re part of my soul now.",
+    icon: <Clock className="h-6 w-6 text-pink-400" />,
+  },
 ];
 
-export const ProjectsSection = () => {
+export const MomentsSection = () => {
   return (
-    <section id="projects" className="py-24 px-4 relative bg-background text-foreground">
-      {/* Interactive Background */}
+    <section
+      id="moments"
+      className="py-24 px-4 relative bg-black text-white overflow-hidden"
+    >
       <div className="absolute inset-0 z-0">
         <InteractiveParticleBackground />
       </div>
 
       <div className="container mx-auto max-w-6xl relative z-10">
-        <h2 className="text-4xl font-bold text-center mb-4">
-          Featured <span className="text-primary">Projects</span>
+        <h2 className="text-4xl font-bold text-center mb-6 animate-fade-in">
+          Moments <span className="text-pink-400">with Her</span>
         </h2>
-        <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-          Here are some of my recent works. I focus on performance, clean code, and pixel-perfect UI to build robust and user-centric applications.
+        <p className="text-center text-gray-400 mb-12 max-w-2xl mx-auto animate-fade-in">
+          These memories are frozen in time — not just in my heart, but now in code.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
+          {moments.map((moment, index) => (
             <div
-              key={project.id}
-              className={cn(
-                "rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 group overflow-hidden animate-fade-in",
-                "p-6 flex flex-col gap-3"
-              )}
+              key={moment.id}
+              className="rounded-xl border border-pink-300/20 bg-pink-900/10 p-6 shadow-md backdrop-blur-md transition-transform transform hover:scale-105 animate-fade-in"
               style={{
-                backgroundColor: "hsl(var(--card))",
                 animationDelay: `${index * 150}ms`,
                 animationFillMode: "both",
               }}
             >
-              <div className="flex flex-wrap gap-2">
-                {project.tags.map((tag, i) => (
-                  <span
-                    key={i}
-                    className="bg-secondary text-xs text-secondary-foreground px-3 py-1 rounded-full font-medium"
-                  >
-                    {tag}
-                  </span>
-                ))}
+              <div className="flex items-center gap-4 mb-4">
+                <div className="p-3 bg-pink-400/10 rounded-full">
+                  {moment.icon}
+                </div>
+                <h3 className="text-xl font-semibold">{moment.title}</h3>
               </div>
 
-              <h3 className="text-xl font-semibold">{project.title}</h3>
-              <p className="text-muted-foreground text-sm">{project.description}</p>
+              {moment.image && (
+                <img
+                  src={moment.image}
+                  alt={moment.title}
+                  className="rounded-lg w-full h-48 object-cover mb-4"
+                />
+              )}
 
-              <div className="mt-3 flex items-center gap-4">
-                {project.githubUrl && (
-                  <a
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-4 py-2 rounded-md bg-primary text-white text-sm flex items-center gap-2 hover:bg-primary/90 transition"
-                  >
-                    <Github size={16} /> View GitHub
-                  </a>
-                )}
-                {project.demoUrl && (
-                  <a
-                    href={project.demoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-4 py-2 rounded-md bg-secondary text-secondary-foreground text-sm flex items-center gap-2 hover:bg-secondary/80 transition"
-                  >
-                    <ExternalLink size={16} /> Live Demo
-                  </a>
-                )}
-              </div>
+              <p className="text-gray-300 text-sm">{moment.description}</p>
             </div>
           ))}
-        </div>
-
-        <div className="text-center mt-14">
-          <a
-            className="cosmic-button w-fit mx-auto flex items-center gap-2"
-            target="_blank"
-            href="https://github.com/bhanu250506?tab=repositories"
-            rel="noopener noreferrer"
-          >
-            Check My Github <ArrowRight size={16} />
-          </a>
         </div>
       </div>
 
@@ -112,15 +111,16 @@ export const ProjectsSection = () => {
         @keyframes fade-in {
           from {
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(20px);
           }
           to {
             opacity: 1;
             transform: translateY(0);
           }
         }
+
         .animate-fade-in {
-          animation: fade-in 0.8s ease-out both;
+          animation: fade-in 0.9s ease-out both;
         }
       `}</style>
     </section>

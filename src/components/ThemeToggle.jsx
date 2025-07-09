@@ -38,12 +38,12 @@ export const ThemeToggle = () => {
       onClick={toggleTheme}
       aria-label="Toggle theme"
       className={cn(
-        "fixed max-sm:hidden top-5 right-5 z-50 p-3 rounded-full cursor-pointer",
-        "bg-gradient-to-br from-purple-500 via-pink-500 to-red-500",
-        "shadow-lg hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-pink-400/60",
-        "transition-all duration-500 ease-in-out transform",
-        isAnimating ? "animate-spin-slow" : "hover:scale-110"
-      )}
+  "fixed top-5 right-5 z-50 p-3 rounded-full cursor-pointer",
+  "bg-gradient-to-br from-purple-500 via-pink-500 to-red-500",
+  "shadow-lg hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-pink-400/60",
+  "transition-all duration-500 ease-in-out transform",
+  isAnimating ? "animate-spin-slow" : "hover:scale-110"
+)}
     >
       {isDarkMode ? (
         <Sun className="h-6 w-6 text-yellow-300 drop-shadow-lg" />
