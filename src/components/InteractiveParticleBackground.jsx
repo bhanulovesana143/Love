@@ -6,56 +6,56 @@ export const InteractiveParticleBackground = () => {
   useEffect(() => {
     const c = canvasRef.current;
     const ctx = c.getContext("2d");
-    let hearts = [];
+    let particles = [];
     let animationId;
 
-    const heartCount = Math.floor((window.innerWidth * window.innerHeight) / 2000); // More hearts!
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    c.width = width;
+    c.height = height;
 
-    c.width = window.innerWidth;
-    c.height = window.innerHeight;
+    const heartCount = Math.floor((width * height) / 1600); // Denser effect
 
-    class Heart {
+    class Particle {
       constructor() {
         this.reset();
       }
+
       reset() {
-        this.x = Math.random() * c.width;
-        this.y = Math.random() * c.height;
-        this.vx = (Math.random() - 0.5) * 0.7;
-        this.vy = (Math.random() - 0.5) * 0.7;
-        this.baseSize = Math.random() * 4 + 3;
-        this.size = this.baseSize;
-        this.alpha = Math.random() * 0.3 + 0.7;
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 0.5;
+        this.vy = (Math.random() - 0.5) * 0.5;
+        this.size = Math.random() * 5 + 3;
+        this.alpha = Math.random() * 0.5 + 0.5;
+        this.time = Math.random() * Math.PI * 2;
+        this.pulseSpeed = Math.random() * 0.02 + 0.01;
         this.color = this.randomColor();
-        this.pulse = Math.random() * 0.02 + 0.005;
-        this.time = 0;
       }
+
       randomColor() {
-        const pinkShades = [
-          "255,105,180", // Hot Pink
-          "255,182,193", // Light Pink
-          "255,20,147",  // Deep Pink
-          "255,128,171", // Pastel
-          "255,192,203"  // Soft Blush
+        const shades = [
+          "255,105,180",   // Hot Pink
+          "255,182,193",   // Light Pink
+          "255,20,147",    // Deep Pink
+          "255,128,171",   // Pastel Pink
+          "255,192,203"    // Blush
         ];
-        return pinkShades[Math.floor(Math.random() * pinkShades.length)];
+        return shades[Math.floor(Math.random() * shades.length)];
       }
+
       update() {
         this.x += this.vx;
         this.y += this.vy;
-        this.time += this.pulse;
-        this.size = this.baseSize + Math.sin(this.time * 2) * 1.5;
+        this.time += this.pulseSpeed;
+        this.size = 3 + Math.sin(this.time * 2) * 1.5;
 
-        if (
-          this.x < -50 ||
-          this.x > c.width + 50 ||
-          this.y < -50 ||
-          this.y > c.height + 50
-        ) {
+        if (this.x < -50 || this.x > width + 50 || this.y < -50 || this.y > height + 50) {
           this.reset();
         }
       }
-      draw() {
+
+      drawHeart(ctx) {
         ctx.save();
         ctx.translate(this.x, this.y);
         ctx.scale(this.size / 10, this.size / 10);
@@ -67,37 +67,43 @@ export const InteractiveParticleBackground = () => {
         ctx.bezierCurveTo(5, -3, 0, -3, 0, 0);
         ctx.closePath();
         ctx.fillStyle = `rgba(${this.color}, ${this.alpha})`;
-        ctx.shadowColor = `rgba(${this.color}, 0.6)`;
-        ctx.shadowBlur = 12;
+        ctx.shadowColor = `rgba(${this.color}, 0.7)`;
+        ctx.shadowBlur = 15;
         ctx.fill();
         ctx.restore();
       }
     }
 
-    const createHearts = () => {
-      hearts = [];
+    const createParticles = () => {
+      particles = [];
       for (let i = 0; i < heartCount; i++) {
-        hearts.push(new Heart());
+        particles.push(new Particle());
       }
     };
 
     const animate = () => {
-      ctx.fillStyle = "rgba(0,0,0,0.2)";
-      ctx.fillRect(0, 0, c.width, c.height);
-      hearts.forEach((h) => {
-        h.update();
-        h.draw();
+      // Create a subtle gradient trail
+      const gradient = ctx.createLinearGradient(0, 0, 0, height);
+      gradient.addColorStop(0, "rgba(10,10,30,0.3)");
+      gradient.addColorStop(1, "rgba(30,0,30,0.3)");
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, width, height);
+
+      particles.forEach((p) => {
+        p.update();
+        p.drawHeart(ctx);
       });
+
       animationId = requestAnimationFrame(animate);
     };
 
-    createHearts();
+    createParticles();
     animate();
 
     const handleResize = () => {
       c.width = window.innerWidth;
       c.height = window.innerHeight;
-      createHearts();
+      createParticles();
     };
 
     window.addEventListener("resize", handleResize);
@@ -119,7 +125,7 @@ export const InteractiveParticleBackground = () => {
         height: "100%",
         zIndex: 0,
         pointerEvents: "none",
-        backgroundColor: "#000",
+        background: "radial-gradient(circle at center, #0b001f 0%, #000 100%)",
       }}
     />
   );
